@@ -11,48 +11,63 @@ const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzbzSxi
 
 let allRecipes = [];
 
+
 function fetchAndDisplayRecipes() {
-   fetch(googleSheetURL)
-        .then(response => response.text())
-       .then(csv => {
-          const rows = csvToObjects(csv);
-          if(rows) {
-               allRecipes = rows;
-                displayRecipes(allRecipes);
-               populateFilterOptions();
-           } else {
-              console.error("Data in incorrect format:", csv)
-                recipeContainer.innerHTML = "Data in incorrect format"
-           }
-    })
+    fetch(googleSheetURL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+           return response.text();
+      })
+        .then(csv => {
+            console.log("CSV data received:", csv);
+            const rows = csvToObjects(csv);
+            if(rows) {
+                 allRecipes = rows;
+                  displayRecipes(allRecipes);
+                 populateFilterOptions();
+             } else {
+                console.error("Data in incorrect format:", csv)
+                  recipeContainer.innerHTML = "Data in incorrect format"
+             }
+         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            recipeContainer.innerHTML = "Error fetching recipe data."
-          });
+             recipeContainer.innerHTML = "Error fetching recipe data."
+         });
 }
+
 
 function csvToObjects(csv) {
     const lines = csv.trim().split('\n');
-    // Check if there are no lines or only a header. If so return empty array
-    if (lines.length <= 1) return [];
+
+    if (lines.length <= 1) {
+        console.warn("No data or only header found in CSV.");
+        return []; //Return an empty array if there are no recipes or the file is just a header
+    }
+
 
     const headers = lines[0].split(',').map(header => header.trim().replace(/"/g, ''));
-    if(headers.length === 0) return [];
+    if(headers.length === 0) {
+      console.warn("No headers found in CSV.");
+      return [];
+    }
+
 
     const recipes = lines.slice(1).map(line => {
-        const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
-
-       if (values.length !== headers.length) {
-                console.error("Mismatched headers and values:", values);
-                 return null;
-           }
+       const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
+        if (values.length !== headers.length) {
+            console.error("Mismatched headers and values:", values, "Headers:", headers);
+            return null;
+        }
       const recipe = {};
-      headers.forEach((header, index) => {
-         recipe[header] = values[index];
-      });
-       return recipe;
+        headers.forEach((header, index) => {
+        recipe[header] = values[index];
+       });
+         return recipe;
    });
-    return recipes.filter(recipe => recipe !== null); // Remove any null recipes
+    return recipes.filter(recipe => recipe !== null);
 }
 
 
@@ -63,7 +78,7 @@ function displayRecipes(recipes) {
         recipeCard.classList.add('recipe-card');
       recipeCard.style.opacity = 0; // Start with opacity 0
 
-     recipeCard.innerHTML = `
+      recipeCard.innerHTML = `
           <h3>${recipe.Name}</h3>
           <p><strong>Ingredients:</strong> ${recipe.Ingredients}</p>
           <p><strong>Instructions:</strong> ${recipe.Instructions}</p>
@@ -72,7 +87,7 @@ function displayRecipes(recipes) {
         recipeContainer.appendChild(recipeCard);
     setTimeout(() => {
           recipeCard.style.opacity = 1;
-      }, 10); // slight delay to allow browser to render
+      }, 10);
   });
 }
 
@@ -94,6 +109,7 @@ function populateFilterOptions() {
     });
 }
 
+
 searchInput.addEventListener('input', () => {
     filterRecipes();
 });
@@ -101,6 +117,8 @@ searchInput.addEventListener('input', () => {
 filterTags.addEventListener('change', () => {
     filterRecipes();
 });
+
+
 
 function filterRecipes() {
     const searchTerm = searchInput.value.toLowerCase();
@@ -123,10 +141,9 @@ function filterRecipes() {
 }
 
 
+
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
 });
-
-
 
 fetchAndDisplayRecipes();
