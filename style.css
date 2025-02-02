@@ -1,0 +1,254 @@
+/* General Styles */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #333;
+    color: #f4f4f4;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.light-mode {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-direction: column;
+}
+
+header h1 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Toggle Switch */
+#darkModeToggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    background-color: #555;
+    border-radius: 34px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+#darkModeToggle::before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #eee;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+body.light-mode #darkModeToggle {
+  background-color: #ccc;
+}
+
+body.light-mode #darkModeToggle::before {
+  background-color: #333;
+  transform: translateX(26px)
+}
+
+/* Buttons */
+button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #777;
+}
+
+body.light-mode button {
+  background-color: #007bff;
+}
+
+body.light-mode button:hover {
+    background-color: #0056b3;
+}
+
+/* Input */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #666;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  display: block;
+  box-sizing: border-box;
+  background-color: #444;
+  color: #fff;
+  width: 100%;
+  max-width: 300px;
+}
+
+body.light-mode input, body.light-mode select, body.light-mode textarea {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Recipe Container */
+.recipe-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+    max-width: 900px;
+}
+
+.recipe-card {
+    background-color: #444;
+    border: 1px solid #666;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    text-align: left
+}
+
+body.light-mode .recipe-card {
+  background-color: #fff;
+  color: #333;
+  border-color: #ddd;
+}
+
+.recipe-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.recipe-card p {
+    margin-bottom: 0.75em;
+    font-size: .9em;
+}
+
+.recipe-card p strong {
+  font-weight: 600;
+}
+
+.recipe-card .tags {
+    font-style: italic;
+    color: #bbb;
+    font-size: .9em;
+    margin-top: auto;
+}
+
+body.light-mode .recipe-card .tags {
+  color: #777
+}
+
+.add-recipe-form {
+  background-color: #2a2a2a; /* Slightly different background */
+  border: 2px solid #777; /* Different border */
+  padding: 25px;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+  transition: all 0.3s;
+  color: #eee;
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+    align-items: center; /* center items in add recipe form*/
+    text-align: center; /* center text */
+}
+
+body.light-mode .add-recipe-form{
+  background-color: #fff;
+  color: #333;
+  border-color: #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.add-recipe-form h2 {
+    margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 769px) {
+     .recipe-container {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      max-width: 1200px;
+    }
+
+    .add-recipe-form {
+        max-width: 500px;
+        padding: 30px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .recipe-container {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    header button{
+      margin-top: 10px;
+    }
+
+    /* Show the mobile-style menu */
+    .recipe-container {
+        display: flex;
+    }
+
+    .recipe-card {
+      width: 100%;
+      margin-bottom: 10px
+    }
+
+    .controls {
+        width: 100%;
+    }
+    input, select, textarea {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .add-recipe-form {
+      max-width: 100%;
+  }
+}
