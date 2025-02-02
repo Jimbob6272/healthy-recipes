@@ -11,7 +11,6 @@ const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzbzSxi
 
 let allRecipes = [];
 
-
 function fetchAndDisplayRecipes() {
     fetch(googleSheetURL)
         .then(response => {
@@ -42,32 +41,54 @@ function fetchAndDisplayRecipes() {
 function csvToObjects(csv) {
     const lines = csv.trim().split('\n');
 
+
     if (lines.length <= 1) {
         console.warn("No data or only header found in CSV.");
         return [];
     }
 
     const headers = lines[0].split(',').map(header => header.trim().replace(/"/g, ''));
-    if(headers.length === 0) {
+     if(headers.length === 0) {
       console.warn("No headers found in CSV.");
       return [];
-    }
+   }
 
-    const recipes = lines.slice(1).map(line => {
-       const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
+   const recipes = lines.slice(1).map(line => {
+        const values = parseCSVLine(line);
+
         if (values.length !== headers.length) {
-            console.error("Mismatched headers and values:", values, "Headers:", headers);
-            return null;
+           console.error("Mismatched headers and values:", values, "Headers:", headers);
+             return null;
         }
       const recipe = {};
         headers.forEach((header, index) => {
         recipe[header] = values[index];
-       });
-         return recipe;
-   });
+        });
+        return recipe;
+    });
+
     return recipes.filter(recipe => recipe !== null);
 }
 
+
+function parseCSVLine(line) {
+  const values = [];
+  let currentValue = '';
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+     const char = line[i];
+     if (char === '"') {
+        inQuotes = !inQuotes;
+     } else if (char === ',' && !inQuotes) {
+       values.push(currentValue.trim());
+        currentValue = '';
+      } else {
+       currentValue += char;
+     }
+  }
+ values.push(currentValue.trim());
+    return values;
+ }
 
 function displayRecipes(recipes) {
     recipeContainer.innerHTML = '';
@@ -89,6 +110,7 @@ function displayRecipes(recipes) {
   });
 }
 
+
 function populateFilterOptions() {
     const allTags = new Set();
     allRecipes.forEach(recipe => {
@@ -106,7 +128,6 @@ function populateFilterOptions() {
     });
 }
 
-
 searchInput.addEventListener('input', () => {
     filterRecipes();
 });
@@ -114,6 +135,7 @@ searchInput.addEventListener('input', () => {
 filterTags.addEventListener('change', () => {
     filterRecipes();
 });
+
 
 function filterRecipes() {
     const searchTerm = searchInput.value.toLowerCase();
@@ -135,8 +157,10 @@ function filterRecipes() {
    }, 300)
 }
 
+
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
 });
+
 
 fetchAndDisplayRecipes();
