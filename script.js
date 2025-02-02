@@ -3,12 +3,7 @@ const searchInput = document.getElementById('searchInput');
 const filterTags = document.getElementById('filterTags');
 const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
-const addRecipeForm = document.getElementById('addRecipeForm');
-const newRecipeNameInput = document.getElementById('newRecipeName');
-const newRecipeIngredientsInput = document.getElementById('newRecipeIngredients');
-const newRecipeInstructionsInput = document.getElementById('newRecipeInstructions');
-const newRecipeTagsInput = document.getElementById('newRecipeTags');
-const addNewRecipeButton = document.getElementById('addNewRecipeButton');
+
 
 //  IMPORTANT!  Replace this with your published Google Sheet CSV URL
 const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzbzSxiOWJAEHbVfAGSf3bPBvxU2sExpX3uiWQc6i15wLy6F0lonPtm3t4_O_qbv9-3NTOBkdK_V5J/pub?output=csv';
@@ -43,6 +38,7 @@ function csvToObjects(csv) {
 
     const headers = lines[0].split(',').map(header => header.trim().replace(/"/g, ''));
     if(headers.length === 0) return [];
+
     const recipes = lines.slice(1).map(line => {
         const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
 
@@ -58,6 +54,7 @@ function csvToObjects(csv) {
    });
     return recipes.filter(recipe => recipe !== null); // Remove any null recipes
 }
+
 
 function displayRecipes(recipes) {
     recipeContainer.innerHTML = '';
@@ -97,7 +94,6 @@ function populateFilterOptions() {
     });
 }
 
-
 searchInput.addEventListener('input', () => {
     filterRecipes();
 });
@@ -105,7 +101,6 @@ searchInput.addEventListener('input', () => {
 filterTags.addEventListener('change', () => {
     filterRecipes();
 });
-
 
 function filterRecipes() {
     const searchTerm = searchInput.value.toLowerCase();
@@ -118,25 +113,20 @@ function filterRecipes() {
 
         const matchesTag = !selectedTag || (recipe.Tags && recipe.Tags.split(',').map(tag => tag.trim()).includes(selectedTag));
         return matchesSearch && matchesTag;
+
     });
-    recipeContainer.classList.add('fade-out');
+      recipeContainer.classList.add('fade-out');
   setTimeout(() => {
         displayRecipes(filteredRecipes);
         recipeContainer.classList.remove('fade-out')
    }, 300)
 }
 
+
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
 });
 
-addNewRecipeButton.addEventListener('click', (event) => {
-  event.preventDefault();
- console.log("Functionality to add recipes is currently not available.");
-    newRecipeNameInput.value = '';
-    newRecipeIngredientsInput.value = '';
-   newRecipeInstructionsInput.value = '';
-    newRecipeTagsInput.value = '';
-})
+
 
 fetchAndDisplayRecipes();
