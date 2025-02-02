@@ -11,7 +11,7 @@ const newRecipeTagsInput = document.getElementById('newRecipeTags');
 const addNewRecipeButton = document.getElementById('addNewRecipeButton');
 
 //  IMPORTANT!  Replace this with your published Google Sheet CSV URL
-const googleSheetURL = 'PASTE_YOUR_PUBLISHED_GOOGLE_SHEET_CSV_URL_HERE';
+const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQh0Q4x_O-9s-iJmXG87d1h72N88J34-aD6j0Q7XkK_wZ179Ue6Vb8gW8yC5-5L8yLzJ5Q4a_r/pub?output=csv';
 
 
 let allRecipes = [];
@@ -138,35 +138,12 @@ addNewRecipeButton.addEventListener('click', (event) => {
         Tags: newRecipeTagsInput.value
     };
 
-  // Get the published google sheet
-    fetch(googleSheetURL)
-    .then(response => response.text())
-   .then(csv => {
-           const url = 'YOUR_GOOGLE_SHEET_API_ENDPOINT'; // <-- replace with your Google Sheets API endpoint
-          const values = [[newRecipe.Name, newRecipe.Ingredients, newRecipe.Instructions, newRecipe.Tags]]
-          console.log(values)
-          fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-             body: JSON.stringify({values: values}),
-          })
-          .then(response => response.json())
-          .then((data) => {
-             console.log('Success: ', data);
-                fetchAndDisplayRecipes()
-
-            })
-            .catch(error => console.error('Error adding recipe', error));
-        })
-
-  // Clear the form
-  newRecipeNameInput.value = '';
-  newRecipeIngredientsInput.value = '';
-  newRecipeInstructionsInput.value = '';
-  newRecipeTagsInput.value = '';
+   console.log("Functionality to add recipes is currently not available.");
+     // Clear the form
+    newRecipeNameInput.value = '';
+    newRecipeIngredientsInput.value = '';
+    newRecipeInstructionsInput.value = '';
+    newRecipeTagsInput.value = '';
 })
-
 
 fetchAndDisplayRecipes();
