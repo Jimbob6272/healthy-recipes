@@ -9,7 +9,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 body.light-mode {
@@ -154,9 +154,7 @@ textarea {
     flex-direction: column;
     text-align: left;
       position: relative;
-
 }
-
 
 body.light-mode .recipe-card {
   background-color: #fff;
@@ -175,7 +173,6 @@ body.light-mode .recipe-card {
     border-radius: 10px;
     z-index: -1;
 }
-
 
 .recipe-card h3 {
     margin-top: 0;
@@ -206,72 +203,34 @@ body.light-mode .recipe-card .tags {
   color: #777
 }
 
-.add-recipe-form {
-  background-color: #2a2a2a;
-  border: 2px solid #777;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s;
-  color: #eee;
-  width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-body.light-mode .add-recipe-form{
-  background-color: #fff;
-  color: #333;
-  border-color: #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.add-recipe-form h2 {
-    margin-bottom: 20px;
-    font-size: 1.5em;
-}
-
 /* Responsive Adjustments */
 @media (min-width: 769px) {
      .recipe-container {
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       max-width: 1200px;
     }
-
-   .add-recipe-form {
-    max-width: 500px;
-    padding: 30px;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
 @media (max-width: 768px) {
     .recipe-container {
         display: flex;
         flex-direction: column;
-       padding: 0 10px;
+        padding: 0 10px;
     }
+
     .recipe-card {
-          max-width: 100%;
-           margin-bottom: 10px;
-          padding: 15px;
-          font-size: 1em;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 15px;
+        font-size: 1em;
     }
+
   .controls {
         width: 100%;
         align-items: center;
     }
-        input, select, textarea {
+     input, select, textarea {
         width: 90%;
-         max-width: 350px;
-    }
-     .add-recipe-form {
-        max-width: 100%;
-        border-left: none;
-        border-right: none;
-        border-radius: 0
+        max-width: 350px;
     }
 }
