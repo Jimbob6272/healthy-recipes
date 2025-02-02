@@ -11,7 +11,7 @@ const newRecipeTagsInput = document.getElementById('newRecipeTags');
 const addNewRecipeButton = document.getElementById('addNewRecipeButton');
 
 //  IMPORTANT!  Replace this with your published Google Sheet CSV URL
-const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQh0Q4x_O-9s-iJmXG87d1h72N88J34-aD6j0Q7XkK_wZ179Ue6Vb8gW8yC5-5L8yLzJ5Q4a_r/pub?output=csv';
+const googleSheetURL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSzbzSxiOWJAEHbVfAGSf3bPBvxU2sExpX3uiWQc6i15wLy6F0lonPtm3t4_O_qbv9-3NTOBkdK_V5J/pub?output=csv';
 
 
 let allRecipes = [];
@@ -38,22 +38,18 @@ function fetchAndDisplayRecipes() {
 
 function csvToObjects(csv) {
     const lines = csv.trim().split('\n');
-
     // Check if there are no lines or only a header. If so return empty array
     if (lines.length <= 1) return [];
 
     const headers = lines[0].split(',').map(header => header.trim().replace(/"/g, ''));
     if(headers.length === 0) return [];
-
-
     const recipes = lines.slice(1).map(line => {
         const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
 
-        // Remove recipes with invalid data
        if (values.length !== headers.length) {
-           console.error("Mismatched headers and values:", values);
-             return null;
-       }
+                console.error("Mismatched headers and values:", values);
+                 return null;
+           }
       const recipe = {};
       headers.forEach((header, index) => {
          recipe[header] = values[index];
@@ -62,8 +58,6 @@ function csvToObjects(csv) {
    });
     return recipes.filter(recipe => recipe !== null); // Remove any null recipes
 }
-
-
 
 function displayRecipes(recipes) {
     recipeContainer.innerHTML = '';
@@ -85,6 +79,7 @@ function displayRecipes(recipes) {
   });
 }
 
+
 function populateFilterOptions() {
     const allTags = new Set();
     allRecipes.forEach(recipe => {
@@ -101,6 +96,7 @@ function populateFilterOptions() {
         filterTags.appendChild(option);
     });
 }
+
 
 searchInput.addEventListener('input', () => {
     filterRecipes();
@@ -122,9 +118,8 @@ function filterRecipes() {
 
         const matchesTag = !selectedTag || (recipe.Tags && recipe.Tags.split(',').map(tag => tag.trim()).includes(selectedTag));
         return matchesSearch && matchesTag;
-
     });
-      recipeContainer.classList.add('fade-out');
+    recipeContainer.classList.add('fade-out');
   setTimeout(() => {
         displayRecipes(filteredRecipes);
         recipeContainer.classList.remove('fade-out')
@@ -143,6 +138,5 @@ addNewRecipeButton.addEventListener('click', (event) => {
    newRecipeInstructionsInput.value = '';
     newRecipeTagsInput.value = '';
 })
-
 
 fetchAndDisplayRecipes();
