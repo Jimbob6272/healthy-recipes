@@ -255,7 +255,7 @@ body.light-mode .add-recipe-form{
        padding: 0 10px;
     }
     .recipe-card {
-          width: 100%;
+          max-width: 100%;
            margin-bottom: 10px;
           padding: 15px;
           font-size: 1em;
