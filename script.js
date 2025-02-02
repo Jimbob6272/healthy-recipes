@@ -44,16 +44,14 @@ function csvToObjects(csv) {
 
     if (lines.length <= 1) {
         console.warn("No data or only header found in CSV.");
-        return []; //Return an empty array if there are no recipes or the file is just a header
+        return [];
     }
-
 
     const headers = lines[0].split(',').map(header => header.trim().replace(/"/g, ''));
     if(headers.length === 0) {
       console.warn("No headers found in CSV.");
       return [];
     }
-
 
     const recipes = lines.slice(1).map(line => {
        const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
@@ -76,7 +74,7 @@ function displayRecipes(recipes) {
     recipes.forEach(recipe => {
       const recipeCard = document.createElement('div');
         recipeCard.classList.add('recipe-card');
-      recipeCard.style.opacity = 0; // Start with opacity 0
+      recipeCard.style.opacity = 0;
 
       recipeCard.innerHTML = `
           <h3>${recipe.Name}</h3>
@@ -90,7 +88,6 @@ function displayRecipes(recipes) {
       }, 10);
   });
 }
-
 
 function populateFilterOptions() {
     const allTags = new Set();
@@ -118,8 +115,6 @@ filterTags.addEventListener('change', () => {
     filterRecipes();
 });
 
-
-
 function filterRecipes() {
     const searchTerm = searchInput.value.toLowerCase();
     const selectedTag = filterTags.value;
@@ -139,8 +134,6 @@ function filterRecipes() {
         recipeContainer.classList.remove('fade-out')
    }, 300)
 }
-
-
 
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
