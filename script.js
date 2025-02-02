@@ -18,17 +18,17 @@ let allRecipes = [];
 
 function fetchAndDisplayRecipes() {
    fetch(googleSheetURL)
-        .then(response => response.text()) // Fetch as text (CSV)
+        .then(response => response.text())
        .then(csv => {
-            const rows = csvToObjects(csv);
-            if(rows) {
-                allRecipes = rows;
-              displayRecipes(allRecipes);
-             populateFilterOptions();
-         } else {
-            console.error("Data in incorrect format:", csv)
-            recipeContainer.innerHTML = "Data in incorrect format"
-          }
+          const rows = csvToObjects(csv);
+          if(rows) {
+               allRecipes = rows;
+                displayRecipes(allRecipes);
+               populateFilterOptions();
+           } else {
+              console.error("Data in incorrect format:", csv)
+                recipeContainer.innerHTML = "Data in incorrect format"
+           }
     })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -36,47 +36,54 @@ function fetchAndDisplayRecipes() {
           });
 }
 
-
 function csvToObjects(csv) {
     const lines = csv.trim().split('\n');
-    if (lines.length <= 1) return []; // Check for empty or header-only CSV
+
+    // Check if there are no lines or only a header. If so return empty array
+    if (lines.length <= 1) return [];
 
     const headers = lines[0].split(',').map(header => header.trim().replace(/"/g, ''));
-     const recipes = lines.slice(1).map(line => {
-    const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
-        if (values.length !== headers.length) {
-                console.error("Mismatched headers and values:", values);
-                return null;
-            }
+    if(headers.length === 0) return [];
+
+
+    const recipes = lines.slice(1).map(line => {
+        const values = line.split(',').map(value => value.trim().replace(/"/g, ''));
+
+        // Remove recipes with invalid data
+       if (values.length !== headers.length) {
+           console.error("Mismatched headers and values:", values);
+             return null;
+       }
       const recipe = {};
       headers.forEach((header, index) => {
-        recipe[header] = values[index];
-        });
-      return recipe;
-  });
+         recipe[header] = values[index];
+      });
+       return recipe;
+   });
     return recipes.filter(recipe => recipe !== null); // Remove any null recipes
 }
 
-function displayRecipes(recipes) {
-  recipeContainer.innerHTML = '';
-  recipes.forEach(recipe => {
-      const recipeCard = document.createElement('div');
-      recipeCard.classList.add('recipe-card');
-        recipeCard.style.opacity = 0; // Start with opacity 0
 
-      recipeCard.innerHTML = `
+
+function displayRecipes(recipes) {
+    recipeContainer.innerHTML = '';
+    recipes.forEach(recipe => {
+      const recipeCard = document.createElement('div');
+        recipeCard.classList.add('recipe-card');
+      recipeCard.style.opacity = 0; // Start with opacity 0
+
+     recipeCard.innerHTML = `
           <h3>${recipe.Name}</h3>
           <p><strong>Ingredients:</strong> ${recipe.Ingredients}</p>
           <p><strong>Instructions:</strong> ${recipe.Instructions}</p>
-          <p class="tags"><strong>Tags:</strong> ${recipe.Tags}</p>
+         <p class="tags"><strong>Tags:</strong> ${recipe.Tags}</p>
       `;
         recipeContainer.appendChild(recipeCard);
-     setTimeout(() => {
+    setTimeout(() => {
           recipeCard.style.opacity = 1;
-        }, 10); // slight delay to allow browser to render
-    });
+      }, 10); // slight delay to allow browser to render
+  });
 }
-
 
 function populateFilterOptions() {
     const allTags = new Set();
@@ -117,10 +124,10 @@ function filterRecipes() {
         return matchesSearch && matchesTag;
 
     });
-      recipeContainer.classList.add('fade-out'); // start fade out animation
+      recipeContainer.classList.add('fade-out');
   setTimeout(() => {
-        displayRecipes(filteredRecipes); // display the new recipe elements
-        recipeContainer.classList.remove('fade-out')// remove the class to display the elements with a fade in on the next filter
+        displayRecipes(filteredRecipes);
+        recipeContainer.classList.remove('fade-out')
    }, 300)
 }
 
@@ -129,21 +136,13 @@ darkModeToggle.addEventListener('click', () => {
 });
 
 addNewRecipeButton.addEventListener('click', (event) => {
-  event.preventDefault(); // prevent form from submitting
-
-    const newRecipe = {
-        Name: newRecipeNameInput.value,
-        Ingredients: newRecipeIngredientsInput.value,
-        Instructions: newRecipeInstructionsInput.value,
-        Tags: newRecipeTagsInput.value
-    };
-
-   console.log("Functionality to add recipes is currently not available.");
-     // Clear the form
+  event.preventDefault();
+ console.log("Functionality to add recipes is currently not available.");
     newRecipeNameInput.value = '';
     newRecipeIngredientsInput.value = '';
-    newRecipeInstructionsInput.value = '';
+   newRecipeInstructionsInput.value = '';
     newRecipeTagsInput.value = '';
 })
+
 
 fetchAndDisplayRecipes();
