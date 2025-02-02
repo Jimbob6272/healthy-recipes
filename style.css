@@ -184,9 +184,8 @@ body.light-mode .recipe-card .tags {
   transition: all 0.3s;
   color: #eee;
   width: 100%;
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
     align-items: center; /* center items in add recipe form*/
     text-align: center; /* center text */
 }
@@ -210,11 +209,12 @@ body.light-mode .add-recipe-form{
       max-width: 1200px;
     }
 
-    .add-recipe-form {
-        max-width: 500px;
-        padding: 30px;
-    }
-
+   .add-recipe-form {
+    max-width: 500px;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto; /* Center the form on desktop */
+  }
 }
 
 @media (max-width: 768px) {
