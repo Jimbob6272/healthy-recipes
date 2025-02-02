@@ -112,7 +112,109 @@ let allRecipes = [
       Ingredients: "2 cups cooked chicken (shredded), 1 avocado, 1/4 cup diced red onion, 1 tbsp lemon juice, salt, pepper",
       Instructions: "Mash avocado, combine with other ingredients, salt and pepper to taste.",
        Tags: "Lunch, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
-  }
+  },
+        {
+        Name: "Garlic Herb Lamb Chops",
+        Ingredients: "4 lamb chops, 2 tbsp olive oil, 2 cloves garlic (minced), 1 tsp rosemary, 1 tsp thyme, salt, pepper",
+        Instructions: "Rub lamb chops with olive oil, garlic, and herbs. Sear in a pan for 3-4 minutes per side until desired doneness.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Roasted Brussels Sprouts with Bacon",
+        Ingredients: "1 lb Brussels sprouts, 4 slices nitrate-free bacon, 1 tbsp olive oil, salt, pepper",
+        Instructions: "Toss Brussels sprouts with olive oil, salt, and pepper. Roast at 400°F for 25 minutes. Add cooked, crumbled bacon before serving.",
+        Tags: "Side, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Coconut Turmeric Chicken Soup",
+        Ingredients: "1 lb chicken breast, 1 can coconut milk, 4 cups bone broth, 1 onion, 2 cloves garlic, 1 tbsp turmeric, 1 tsp ginger, salt, pepper",
+        Instructions: "Sauté onions and garlic, add chicken and broth. Simmer until chicken is cooked, shred chicken, add coconut milk, turmeric, and ginger. Simmer for 10 minutes.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Zucchini Fritters",
+        Ingredients: "2 zucchini (grated), 1/4 cup almond flour, 1 egg, 2 tbsp parmesan cheese, salt, pepper, olive oil",
+        Instructions: "Mix all ingredients, form into small patties, cook in olive oil until golden brown on both sides.",
+        Tags: "Side, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Stuffed Bell Peppers",
+        Ingredients: "4 bell peppers, 1 lb ground turkey, 1 cup cauliflower rice, 1/2 cup diced tomatoes, 1/2 onion, 2 cloves garlic, salt, pepper, Italian seasoning",
+        Instructions: "Sauté onions, garlic, and turkey. Stir in tomatoes and cauliflower rice. Stuff into bell peppers, bake at 375°F for 30 minutes.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Lemon Garlic Butter Cod",
+        Ingredients: "2 cod fillets, 2 tbsp butter, 2 cloves garlic (minced), juice of 1 lemon, salt, pepper, parsley",
+        Instructions: "Sear cod in butter for 2-3 minutes per side. Add garlic and lemon juice, cook another minute. Garnish with parsley.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Sautéed Kale with Garlic",
+        Ingredients: "1 bunch kale, 2 tbsp olive oil, 2 cloves garlic, salt, pepper, red pepper flakes",
+        Instructions: "Sauté garlic in olive oil, add kale, cook until wilted, season with salt, pepper, and red pepper flakes.",
+        Tags: "Side, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Coconut Yogurt Parfait",
+        Ingredients: "1 cup coconut yogurt, 1/4 cup mixed berries, 1 tbsp chopped nuts, 1 tsp cinnamon",
+        Instructions: "Layer coconut yogurt with berries and nuts. Sprinkle with cinnamon before serving.",
+        Tags: "Breakfast, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Baked Cod with Olive Tapenade",
+        Ingredients: "2 cod fillets, 1/2 cup black olives (chopped), 1 tbsp capers, 1 tbsp olive oil, 1 clove garlic, juice of 1 lemon",
+        Instructions: "Mix olives, capers, garlic, olive oil, and lemon. Top cod fillets with mixture, bake at 375°F for 15 minutes.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Eggplant Lasagna",
+        Ingredients: "1 eggplant (sliced), 1 lb ground turkey, 1/2 cup ricotta cheese, 1/2 cup mozzarella, 1 cup tomato sauce, Italian seasoning",
+        Instructions: "Brown turkey, layer with eggplant slices, ricotta, and sauce. Top with mozzarella, bake at 375°F for 30 minutes.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Liver and Onions",
+        Ingredients: "1/2 lb beef liver, 1 onion (sliced), 2 tbsp butter, salt, pepper",
+        Instructions: "Sauté onions in butter, add liver slices, cook for 2 minutes per side until browned.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Roasted Garlic Mashed Cauliflower",
+        Ingredients: "1 head cauliflower, 2 tbsp butter, 3 cloves roasted garlic, salt, pepper",
+        Instructions: "Steam cauliflower until soft, blend with butter and roasted garlic until smooth.",
+        Tags: "Side, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Pesto Chicken",
+        Ingredients: "2 chicken breasts, 1/4 cup homemade pesto (basil, garlic, olive oil, parmesan, walnuts), salt, pepper",
+        Instructions: "Spread pesto over chicken, bake at 375°F for 25 minutes.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Coconut Macaroons",
+        Ingredients: "2 cups shredded coconut, 2 egg whites, 1/4 cup maple syrup, 1 tsp vanilla extract",
+        Instructions: "Mix ingredients, form into small balls, bake at 350°F for 15 minutes.",
+        Tags: "Dessert, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Avocado Egg Salad",
+        Ingredients: "3 boiled eggs, 1 avocado, 1/4 cup diced red onion, 1 tbsp lemon juice, salt, pepper",
+        Instructions: "Mash avocado, mix with chopped eggs, onion, lemon juice, salt, and pepper.",
+        Tags: "Lunch, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Garlic Lemon Butter Shrimp",
+        Ingredients: "1 lb shrimp, 2 tbsp butter, 2 cloves garlic, juice of 1 lemon, salt, pepper",
+        Instructions: "Sauté garlic in butter, add shrimp, cook until pink, finish with lemon juice.",
+        Tags: "Dinner, High Protein, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    },
+    {
+        Name: "Balsamic Glazed Roasted Carrots",
+        Ingredients: "1 lb carrots, 2 tbsp balsamic vinegar, 1 tbsp olive oil, salt, pepper",
+        Instructions: "Toss carrots with balsamic and olive oil, roast at 400°F for 20 minutes.",
+        Tags: "Side, No Refined Sugar, No Seed Oils, Thyroid Friendly"
+    }
 ];
 
 function displayRecipes(recipes) {
