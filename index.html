@@ -9,14 +9,19 @@
 <body>
     <header>
         <h1>Recipe Catalog</h1>
-       <button id="darkModeToggle"></button>
+        <button id="darkModeToggle"></button>
     </header>
     <main>
         <div class="controls">
             <input type="text" id="searchInput" placeholder="Search recipes...">
-            <select id="filterTags">
-                <option value="">All Tags</option>
-            </select>
+             <div class="filter-container">
+                <select id="filterMeals" multiple>
+                     <option value="">All Meal Types</option>
+                </select>
+                <select id="filterRestrictions" multiple>
+                   <option value="">All Dietary Restrictions</option>
+                </select>
+            </div>
         </div>
         <div id="recipeContainer" class="recipe-container">
         </div>
