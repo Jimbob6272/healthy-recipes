@@ -46,7 +46,7 @@ header h1 {
     display: inline-block;
     width: 60px;
     height: 34px;
-    background-color: #555;
+   background-color: #7e57c2; /* Dark mode toggle color*/
     border-radius: 34px;
     border: none;
     cursor: pointer;
@@ -77,7 +77,7 @@ body.light-mode #darkModeToggle::before {
 
 /* Buttons */
 button {
-    background-color: #555;
+  background-color: #7e57c2; /* Dark purple button color */
     color: white;
     border: none;
     padding: 10px 15px;
@@ -87,7 +87,8 @@ button {
 }
 
 button:hover {
-    background-color: #777;
+    background-color: #7e57c2; /* Dark purple button hover */
+    filter: brightness(1.1)
 }
 
 body.light-mode button {
@@ -124,19 +125,21 @@ input, select, textarea {
   margin-right: 10px;
   display: block;
   box-sizing: border-box;
-  background-color: #3a2c47; /* Dark purple inputs */
+    background-color: #3a2c47; /* Dark purple inputs */
   color: #fff;
-   width: 90%;
+    width: 90%;
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
     transition: all .2s ease-in;
 }
 
+
 input:focus, select:focus, textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
 
 body.light-mode input, body.light-mode select, body.light-mode textarea {
   background-color: #fff;
@@ -171,25 +174,23 @@ textarea {
     flex-direction: column;
     text-align: left;
       position: relative;
-      animation: fadeIn 0.5s ease-in-out; /* Animation for the recipe cards */
+       animation: fadeIn 0.5s ease-in-out;
 }
-
 
 @keyframes fadeIn {
     from {
       opacity: 0;
-       transform: translateY(20px);
     }
     to {
       opacity: 1;
-      transform: translateY(0);
     }
 }
 
 body.light-mode .recipe-card {
-   background-color: #fff;
+  background-color: #fff;
     color: #333;
 }
+
 
 /* Gradient Border */
 .recipe-card::before {
@@ -262,7 +263,7 @@ body.light-mode .recipe-card .tags {
          max-width: 350px;
     }
 
-        .filter-container {
+     .filter-container {
       flex-direction: column;
     }
 }
