@@ -3,18 +3,27 @@ body {
     font-family: sans-serif;
     margin: 0;
     padding: 10px;
-    background-color: #333;
+   /* background-color: #333;  original color */
     color: #f4f4f4;
     transition: background-color 0.3s, color 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-x: hidden;
-}
+     background: linear-gradient(45deg, #1a1423, #231a2a, #2a1f32, #32233d, #231a2a);
+   background-size: 400% 400%;
+  animation: gradientAnimation 15s ease infinite;
 
+}
+@keyframes gradientAnimation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
 body.light-mode {
     background-color: #f4f4f4;
     color: #333;
+    background: white;
 }
 
 header {
@@ -115,28 +124,25 @@ input, select, textarea {
   margin-right: 10px;
   display: block;
   box-sizing: border-box;
-    background-color: #3a2c47; /* Dark purple inputs */
+  background-color: #3a2c47; /* Dark purple inputs */
   color: #fff;
-    width: 90%;
+   width: 90%;
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
     transition: all .2s ease-in;
 }
 
-
 input:focus, select:focus, textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
-
 
 body.light-mode input, body.light-mode select, body.light-mode textarea {
   background-color: #fff;
   color: #333;
   border-color: #ccc
 }
-
 
 textarea {
   height: 100px;
@@ -160,18 +166,30 @@ textarea {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, transform 0.2s ease-in-out;
-    color: #eee;
+     color: #eee;
     display: flex;
     flex-direction: column;
     text-align: left;
       position: relative;
+      animation: fadeIn 0.5s ease-in-out; /* Animation for the recipe cards */
+}
+
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+       transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
 }
 
 body.light-mode .recipe-card {
-    background-color: #fff;
-  color: #333;
+   background-color: #fff;
+    color: #333;
 }
-
 
 /* Gradient Border */
 .recipe-card::before {
@@ -181,7 +199,7 @@ body.light-mode .recipe-card {
     left: -1px;
     right: -5px;
     bottom: -5px;
-   background: linear-gradient(45deg, #2a1f32, #2a1f32, #7e57c2, #2a1f32, #2a1f32); /* Updated Gradient Border */
+    background: linear-gradient(45deg, #2a1f32, #2a1f32, #7e57c2, #2a1f32, #2a1f32);
     border-radius: 10px;
     z-index: -1;
 }
@@ -243,7 +261,8 @@ body.light-mode .recipe-card .tags {
         width: 90%;
          max-width: 350px;
     }
-    .filter-container {
+
+        .filter-container {
       flex-direction: column;
     }
 }
