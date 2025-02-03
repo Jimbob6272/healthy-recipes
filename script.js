@@ -1,6 +1,7 @@
 const recipeContainer = document.getElementById('recipeContainer');
 const searchInput = document.getElementById('searchInput');
-const filterTags = document.getElementById('filterTags');
+const filterMeals = document.getElementById('filterMeals');
+const filterRestrictions = document.getElementById('filterRestrictions');
 const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 
@@ -38,7 +39,6 @@ function fetchAndDisplayRecipes() {
          });
 }
 
-
 function csvToObjects(csv) {
     const lines = csv.trim().split('\n');
 
@@ -55,7 +55,6 @@ function csvToObjects(csv) {
 
    const recipes = lines.slice(1).map(line => {
         const values = parseCSVLine(line);
-
         if (values.length !== headers.length) {
             console.error("Mismatched headers and values:", values, "Headers:", headers);
              return null;
@@ -69,6 +68,7 @@ function csvToObjects(csv) {
 
     return recipes.filter(recipe => recipe !== null);
 }
+
 
 function parseCSVLine(line) {
   const values = [];
@@ -124,22 +124,17 @@ function populateFilterOptions() {
               const restrictions = recipe["Diet Restrictions"].split(',').map(tag => tag.trim())
             restrictions.forEach(restriction => allDietRestrictions.add(restriction))
         }
-
-
     });
-
-   // Clear existing options
-   filterTags.innerHTML = '<option value="">All Filters</option><optgroup label="Meal Type"></optgroup><optgroup label="Diet Restrictions"></optgroup>';
-    const mealOptGroup = filterTags.querySelector('[label="Meal Type"]');
-    const dietOptGroup = filterTags.querySelector('[label="Diet Restrictions"]');
-
+    // Clear existing options
+    filterMeals.innerHTML = '<option value="">All Meal Types</option>';
+    filterRestrictions.innerHTML = '<option value="">All Dietary Restrictions</option>';
 
 
     allMeals.forEach(tag => {
       const option = document.createElement('option');
        option.value = tag;
        option.textContent = tag;
-     mealOptGroup.appendChild(option);
+     filterMeals.appendChild(option);
   });
 
 
@@ -147,44 +142,55 @@ function populateFilterOptions() {
        const option = document.createElement('option');
         option.value = tag;
        option.textContent = tag;
-      dietOptGroup.appendChild(option)
+      filterRestrictions.appendChild(option)
   });
 }
-
-
-
 
 searchInput.addEventListener('input', () => {
     filterRecipes();
 });
 
-filterTags.addEventListener('change', () => {
+filterMeals.addEventListener('change', () => {
     filterRecipes();
 });
+filterRestrictions.addEventListener('change', () => {
+     filterRecipes();
+});
+
 
 function filterRecipes() {
-    const searchTerm = searchInput.value.toLowerCase();
-    const selectedTag = filterTags.value;
+     const searchTerm = searchInput.value.toLowerCase();
 
-    const filteredRecipes = allRecipes.filter(recipe => {
-        const matchesSearch = recipe.Name.toLowerCase().includes(searchTerm) ||
-                             recipe.Ingredients.toLowerCase().includes(searchTerm) ||
-                             recipe.Instructions.toLowerCase().includes(searchTerm);
-        const matchesMeal = !selectedTag || (recipe.Meal && recipe.Meal.trim() === selectedTag);
-        const matchesDiet = !selectedTag || (recipe["Diet Restrictions"] && recipe["Diet Restrictions"].split(',').map(tag => tag.trim()).includes(selectedTag));
+     const selectedMeals = Array.from(filterMeals.selectedOptions).map(option => option.value);
+     const selectedRestrictions = Array.from(filterRestrictions.selectedOptions).map(option => option.value);
 
-        return matchesSearch && (matchesMeal || matchesDiet);
-    });
-     recipeContainer.classList.add('fade-out');
-      setTimeout(() => {
-           displayRecipes(filteredRecipes);
-            recipeContainer.classList.remove('fade-out')
-       }, 300)
+     const filteredRecipes = allRecipes.filter(recipe => {
+         const matchesSearch = recipe.Name.toLowerCase().includes(searchTerm) ||
+                                  recipe.Ingredients.toLowerCase().includes(searchTerm) ||
+                                  recipe.Instructions.toLowerCase().includes(searchTerm);
+
+          let matchesMeal = true;
+          if (selectedMeals.length > 0 && !selectedMeals.includes("")) {
+              matchesMeal = selectedMeals.includes(recipe.Meal)
+          }
+
+          let matchesRestriction = true
+          if (selectedRestrictions.length > 0 && !selectedRestrictions.includes("")) {
+               matchesRestriction = selectedRestrictions.every(restriction => recipe["Diet Restrictions"] && recipe["Diet Restrictions"].split(',').map(tag => tag.trim()).includes(restriction))
+          }
+
+        return matchesSearch && matchesMeal && matchesRestriction;
+     });
+      recipeContainer.classList.add('fade-out');
+  setTimeout(() => {
+        displayRecipes(filteredRecipes);
+        recipeContainer.classList.remove('fade-out')
+   }, 300)
 }
-
 
 darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('light-mode');
 });
+
 
 fetchAndDisplayRecipes();
