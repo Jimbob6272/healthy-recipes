@@ -115,25 +115,28 @@ input, select, textarea {
   margin-right: 10px;
   display: block;
   box-sizing: border-box;
-  background-color: #444;
+    background-color: #3a2c47; /* Dark purple inputs */
   color: #fff;
-  width: 90%;
+    width: 90%;
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
     transition: all .2s ease-in;
 }
 
+
 input:focus, select:focus, textarea:focus {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
+
 
 body.light-mode input, body.light-mode select, body.light-mode textarea {
   background-color: #fff;
   color: #333;
   border-color: #ccc
 }
+
 
 textarea {
   height: 100px;
@@ -151,23 +154,22 @@ textarea {
 }
 
 .recipe-card {
-    background-color: #444;
+   background-color: #3a2c47; /* Dark purple cards */
     border: 1px solid transparent;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, transform 0.2s ease-in-out;
-     color: #eee;
+    color: #eee;
     display: flex;
     flex-direction: column;
     text-align: left;
       position: relative;
 }
 
-
 body.light-mode .recipe-card {
-  background-color: #fff;
-    color: #333;
+    background-color: #fff;
+  color: #333;
 }
 
 
@@ -179,7 +181,7 @@ body.light-mode .recipe-card {
     left: -1px;
     right: -5px;
     bottom: -5px;
-    background: linear-gradient(45deg, #7e57c2, #9575cd, #ab47bc, #ba68c8); /* Dark Purple */
+   background: linear-gradient(45deg, #2a1f32, #2a1f32, #7e57c2, #2a1f32, #2a1f32); /* Updated Gradient Border */
     border-radius: 10px;
     z-index: -1;
 }
@@ -241,8 +243,7 @@ body.light-mode .recipe-card .tags {
         width: 90%;
          max-width: 350px;
     }
-
-      .filter-container {
+    .filter-container {
       flex-direction: column;
     }
 }
